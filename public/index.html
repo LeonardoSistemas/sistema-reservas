@@ -10,6 +10,60 @@
 <body>
 
     <!-- Conteúdo será adicionado aqui -->
+    <header class="bg-primary text-white text-center py-3">
+        <h1>Sistema de Reservas de Salas</h1>
+        <p>Gerencie suas reservas de maneira rápida e eficiente</p>
+    </header>
+    <section class="container my-5">
+        <h2 class="text-center">Faça sua Reserva</h2>
+        <form class="row row-cols-1 row-cols-md-2 g-3">
+            <div class="col-md-6">
+                <label for="nomeSala" class="form-label">Nome da Sala</label>
+                <input type="text" class="form-control" id="nomeSala" placeholder="Digite o nome da sala" required>
+            </div>
+            <div class="col-md-6">
+                <label for="dataReserva" class="form-label">Data da Reserva</label>
+                <input type="date" class="form-control" id="dataReserva" required>
+            </div>
+            <div class="col-md-6">
+                <label for="horarioReserva" class="form-label">Horário da Reserva</label>
+                <input type="time" class="form-control" id="horarioReserva" required>
+            </div>
+            <div class="col-md-12">
+                <label for="descricaoEvento" class="form-label">Descrição do Evento</label>
+                <textarea class="form-control" id="descricaoEvento" rows="3" placeholder="Descreva o evento"></textarea>
+            </div>
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary">Reservar Sala</button>
+            </div>
+        </form>
+    </section>
+    
+    <section class="container my-5">
+        <h2 class="text-center">Reservas Atuais</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome da Sala</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Horário</th>
+                    <th scope="col">Descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Sala de Reunião 1</td>
+                    <td>2024-09-19</td>
+                    <td>14:00</td>
+                    <td>Reunião de Projeto</td>
+                </tr>
+                <!-- Novas reservas serão adicionadas aqui -->
+            </tbody>
+        </table>
+    </section>
+    
 
     <!-- Bootstrap JS e Popper.js (não utilizaremos ainda, mas são padrões) -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
