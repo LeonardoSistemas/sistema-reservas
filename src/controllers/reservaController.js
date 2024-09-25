@@ -1,45 +1,51 @@
 class ReservaController {
 
     // Controlador para listar todas as reservas
-    static listarReservas = (req, res) => {
-        // Aqui futuramente vamos buscar as reservas no banco de dados
-        res.status(200).json({
-            message: 'Listando todas as reservas (dados fictícios)',
-            reservas: [
-                { id: 1, nomeSala: 'Sala 1', data: '2024-09-19', horario: '14:00', descricao: 'Reunião de projeto' },
-                { id: 2, nomeSala: 'Sala 2', data: '2024-09-20', horario: '10:00', descricao: 'Apresentação de resultados' }
-            ]
-        });
+    static listarReservas = async (req, res) => {
+        try {
+            const reservas = await Reserva.find();
+            res.status(200).json(reservas);
+        } catch (error) {
+            res.status(500).json({ message: 'Erro ao listar reservas', error });
+        }
     };
 
     // Controlador para criar uma nova reserva
-    static criarReserva = (req, res) => {
+    static criarReserva = async (req, res) => {
         const { nomeSala, data, horario, descricao } = req.body;
-        // Lógica para criar uma nova reserva
-        res.status(201).json({
-            message: 'Reserva criada com sucesso',
-            reserva: { id: 3, nomeSala, data, horario, descricao }
-        });
+
+        try {
+            const novaReserva = new Reserva({ nomeSala, data, horario, descricao });
+            await novaReserva.save();
+            res.status(201).json(novaReserva);
+        } catch (error) {
+            res.status(500).json({ message: 'Erro ao criar reserva', error });
+        }
     };
 
     // Controlador para atualizar uma reserva
-    static atualizarReserva = (req, res) => {
+    static atualizarReserva = async (req, res) => {
         const { id } = req.params;
         const { nomeSala, data, horario, descricao } = req.body;
-        // Lógica para atualizar uma reserva existente
-        res.status(200).json({
-            message: `Reserva com ID ${id} atualizada com sucesso`,
-            reserva: { id, nomeSala, data, horario, descricao }
-        });
+
+        try {
+            const reservaAtualizada = await Reserva.findByIdAndUpdate(id, { nomeSala, data, horario, descricao }, { new: true });
+            res.status(200).json(reservaAtualizada);
+        } catch (error) {
+            res.status(500).json({ message: 'Erro ao atualizar reserva', error });
+        }
     };
 
     // Controlador para deletar uma reserva
-    static deletarReserva = (req, res) => {
+    static deletarReserva = async (req, res) => {
         const { id } = req.params;
-        // Lógica para deletar uma reserva existente
-        res.status(200).json({
-            message: `Reserva com ID ${id} deletada com sucesso`
-        });
+
+        try {
+            await Reserva.findByIdAndDelete(id);
+            res.status(200).json({ message: `Reserva com ID ${id} deletada com sucesso` });
+        } catch (error) {
+            res.status(500).json({ message: 'Erro ao deletar reserva', error });
+        }
     };
 }
 
