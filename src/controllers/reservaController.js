@@ -1,3 +1,5 @@
+const Reserva = require('../models/Reserva');
+
 class ReservaController {
 
     // Controlador para listar todas as reservas
