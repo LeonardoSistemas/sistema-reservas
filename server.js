@@ -1,10 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const app = express();
 const port = 3000;
 
 // Middleware para permitir o uso de JSON nas requisições
 app.use(express.json());
+
+// Middleware para habilitar o CORS
+app.use(cors());
 
 // Conectando ao MongoDB
 mongoose.connect('mongodb://localhost:27017/reservas_salas', {
